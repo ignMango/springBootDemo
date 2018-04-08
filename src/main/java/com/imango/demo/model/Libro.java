@@ -13,7 +13,9 @@ public class Libro {
     private Long id;
     private String titulo;
     private String isbn;
-    private String publicador;
+
+    @OneToOne
+    private Editor editor;
 
     @ManyToMany
     @JoinTable(name = "autor_libro", joinColumns = @JoinColumn(name = "libro_id"), inverseJoinColumns = @JoinColumn(name = "autor_id"))
@@ -22,16 +24,16 @@ public class Libro {
     public Libro() {
     }
 
-    public Libro(String titulo, String isbn, String publicador) {
+    public Libro(String titulo, String isbn, Editor editor) {
         this.titulo = titulo;
         this.isbn = isbn;
-        this.publicador = publicador;
+        this.editor = editor;
     }
 
-    public Libro(String titulo, String isbn, String publicador, Set<Autor> autores) {
+    public Libro(String titulo, String isbn, Editor editor, Set<Autor> autores) {
         this.titulo = titulo;
         this.isbn = isbn;
-        this.publicador = publicador;
+        this.editor = editor;
         this.autores = autores;
     }
 
@@ -59,12 +61,12 @@ public class Libro {
         this.isbn = isbn;
     }
 
-    public String getPublicador() {
-        return publicador;
+    public Editor getEditor() {
+        return editor;
     }
 
-    public void setPublicador(String publicador) {
-        this.publicador = publicador;
+    public void setEditor(Editor editor) {
+        this.editor = editor;
     }
 
     public Set<Autor> getAutores() {
@@ -96,7 +98,7 @@ public class Libro {
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", isbn='" + isbn + '\'' +
-                ", publicador='" + publicador + '\'' +
+                ", editor=" + editor +
                 ", autores=" + autores +
                 '}';
     }
